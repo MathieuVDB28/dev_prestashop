@@ -24,7 +24,7 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-require_once dirname(__FILE__) . '/traits/ItrModuleFunctionalitiesTrait.php';
+require dirname(__FILE__) . '/classes/SiteInformations.php';
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -32,8 +32,6 @@ if (!defined('_PS_VERSION_')) {
 
 class Itroommodule extends Module
 {
-    use ItrModuleFunctionalitiesTrait;
-
     public function __construct()
     {
         $this->name = 'itroommodule';
@@ -75,7 +73,7 @@ class Itroommodule extends Module
 
     public function getContent()
     {
-        return $this->getContentFunctionalities();
+        return $this->display(__FILE__, 'views/templates/admin/configure.tpl');
     }
 
     public function _installTab(): bool
@@ -154,18 +152,14 @@ class Itroommodule extends Module
         }
 
         // Récupère le nombre total de produits
-        $totalProducts = Db::getInstance()->getValue('SELECT COUNT(*) FROM ' . _DB_PREFIX_ . 'product');
+        $totalProducts = SiteInformations::getTotalProducts();
 
         // Récupère le coût moyen du panier
-        $averageCartQuery = Db::getInstance()->getValue('SELECT AVG(total_paid) FROM ' . _DB_PREFIX_ . 'orders');
+        $averageCartQuery = SiteInformations::getAverageCart();
         $averageCart = number_format($averageCartQuery);
 
         // Récupère le produit le plus vendu
-        $most_ordered_product_id = Db::getInstance()->execute(
-            'SELECT product_id, SUM(product_quantity) AS total_ordered 
-                FROM ' . _DB_PREFIX_ . 'order_detail 
-                GROUP BY product_id 
-                ORDER BY total_ordered DESC LIMIT 1');
+        $most_ordered_product_id = SiteInformations::getMostOrdered();
         $most_ordered_product = new Product($most_ordered_product_id, false, $lang_id);
         $link = new Link();
         $lang_iso_code = Language::getIsoById($this->context->language->id);
