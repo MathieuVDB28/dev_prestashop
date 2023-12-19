@@ -31,6 +31,8 @@
  */
 $aQuery = [
     'DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'itr_products_errors',
+    'DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'itr_avatars',
+    'DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'itr_customer_avatar'
 ];
 
 foreach ($aQuery as $query) {

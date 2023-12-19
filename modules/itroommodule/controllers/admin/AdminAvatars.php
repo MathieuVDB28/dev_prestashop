@@ -14,13 +14,13 @@ class AdminAvatarsController extends AdminController
 
         parent::__construct();
 
-        $this->fields_list = [ //TODO filtres
+        $this->fields_list = [
             'id_avatar' => [
                 'title' => 'ID',
                 'align' => 'center',
                 'type' => 'int',
             ],
-            'image' => [
+            'file_name' => [
                 'title' => 'Image',
                 'image' => 'avatars',
             ],
@@ -51,7 +51,7 @@ class AdminAvatarsController extends AdminController
                 [
                     'type' => 'file',
                     'label' => $this->trans('Image', [], 'Admin.Global'),
-                    'name' => 'image',
+                    'name' => 'file_name',
                 ],
             ],
             'submit' => [

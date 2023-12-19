@@ -35,7 +35,8 @@ $aQuery[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'itr_products_errors`
     ') ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 
 $aQuery[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'itr_avatars` (' .
-    '`id_avatar` int(11) PRIMARY KEY AUTO_INCREMENT' .
+    '`id_avatar` int(11) PRIMARY KEY AUTO_INCREMENT,' .
+    '`file_name` varchar(255) NOT NULL' .
     ') ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 
 $aQuery[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'itr_customer_avatar` (' .
