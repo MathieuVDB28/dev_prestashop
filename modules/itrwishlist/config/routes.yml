@@ -1,0 +1,8 @@
+itrwishlist_form_simple:
+  path: /itrwishlist/configuration
+  methods: [GET, POST]
+  defaults:
+    _controller: 'PrestaShop\Module\Itrwishlist\Controller\ItrwishlistController::index'
+    # Needed to work with tab system
+    _legacy_controller: AdminItrwishlistFormSimple
+    _legacy_link: AdminItrwishlistFormSimple

@@ -1,0 +1,29 @@
+services:
+  _defaults:
+    public: true
+
+  # Demo configuration text form
+  prestashop.module.itrwishlist.form.type.itrwishlist_text:
+    class: 'PrestaShop\Module\Itrwishlist\Form\ItrwishlistFormType'
+    parent: 'form.type.translatable.aware'
+    public: true
+    tags:
+      - { name: form.type }
+
+  prestashop.module.itrwishlist.form.itrwishlist_text_data_configuration:
+    class: PrestaShop\Module\Itrwishlist\Form\ItrwishlistTextDataConfiguration
+    arguments: ['@prestashop.adapter.legacy.configuration']
+
+  prestashop.module.itrwishlist.form.itrwishlist_text_form_data_provider:
+    class: 'PrestaShop\Module\Itrwishlist\Form\ItrwishlistTextFormDataProvider'
+    arguments:
+      - '@prestashop.module.itrwishlist.form.itrwishlist_text_data_configuration'
+
+  prestashop.module.itrwishlist.form.itrwishlist_text_form_data_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\Handler'
+    arguments:
+      - '@form.factory'
+      - '@prestashop.core.hook.dispatcher'
+      - '@prestashop.module.itrwishlist.form.itrwishlist_text_form_data_provider'
+      - 'PrestaShop\Module\Itrwishlist\Form\ItrwishlistFormType'
+      - 'Itrwishlist'
